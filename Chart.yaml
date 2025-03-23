@@ -1,0 +1,13 @@
+apiVersion: v2
+name: umbrellachart
+description: An umbrellachart
+type: application
+version: 1.0.0
+dependencies:
+  - name: lib
+    version: 1.0.0
+    repository: file://charts/lib
+  - name: samplechart
+    repository: file://charts/samplechart
+    version: 1.0.0
+    condition: samplechart.enabled

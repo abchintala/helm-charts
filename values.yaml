@@ -1,0 +1,43 @@
+global:
+  env:
+    chart: sample
+  image:
+    repository: 
+  imagePullSecrets:
+  - name: sample-ecr
+  hostAliases: []
+  # - hostnames:
+  #   - test.com
+  #   ip: 10.92.4.2
+  envSecrets:
+  - name: SAMPLE_USER
+    secretName: sample-creds
+    key: sampleusername
+
+samplechart:
+  enabled: true
+  env:
+    charts: samplechart
+  envSecrets:
+  - name: SAMPLE_URL
+    secretName: samplechart
+    key: saampleurl
+
+limesurvey:
+  ingress:
+    enabled: true
+    className: ""
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+      nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hosts:
+      - host: samplechart.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+    - hosts:
+      - samplechart.com
+      secretName: letsencrypt-sample

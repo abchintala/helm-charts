@@ -1,0 +1,141 @@
+replicaCount: null
+
+image:
+  repository: ''
+  pullPolicy: IfNotPresent
+  tag: 1.0.0
+
+imagePullSecrets: []
+# - name: 
+
+nameOverride: samplechart
+fullnameOverride: samplechart
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   add: ["NET_ADMIN", "SYS_TIME"]
+
+hostAliases: []
+# - hostnames:
+#   - sample.com
+#   ip: 10.0.0.1
+
+command: []
+# ["/bin/sh", "-c"]
+
+args: []
+# ["cp /tmp/config/sample.sh /sample.sh" ]
+
+service:
+  name: samplechart
+  type: ClusterIP
+  ports:
+  -  name: http-one
+     port: 3001
+     protocol: TCP
+     targetPort: 3001
+  -  name: http-two
+     port: 3002
+     protocol: TCP
+     targetPort: 3002
+
+env:
+  sample_env: "samplevalue"
+
+envSecrets: []
+# - name: sample
+#   secretName: samplesecret
+#   key: mykey
+
+probe:
+  enabled: false
+  # livenessProbe:
+  #   path: /
+  #   initialDelaySeconds: 15
+  #   timeoutSeconds: 30
+  #   failureThreshold: 20
+  #   periodSeconds: 5
+  # readinessProbe:
+  #   path: /
+  #   initialDelaySeconds: 15
+  #   timeoutSeconds: 30
+  #   failureThreshold: 20
+  #   periodSeconds: 5
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+volumeMounts:
+# - name: sample
+#   mountPath: "/mnt"
+#   subPath: "/mnt/sample"
+# - name: sample-cm
+#   mountPath: "/mnt/sample"
+#   subPath: "sample-configmap.sh"
+# - name: sample-secret
+#   mountPath: "/mnt/sample"
+#   subPath: "sample-secret.sh"
+#   readOnly: true
+
+volumes:
+  persistentVolume: []
+  # - name: sample
+  #   claimName: sample
+  configMap: []
+  # - name: sample-cm
+  #   defaultMode: 384
+  #   configMapName: sample
+  #   fileName: sample-configmap.sh
+  #   key: /mnt/sample/sample-configmap.sh
+  #   path: /mnt/sample/sample-configmap.sh
+  #   fileContent: |
+  #     #!/bin/bash
+  #     cat samplefile
+  secret: []
+  # - name: sample-secret
+  #   secretName: mysecretname
+
+pvc:
+  enabled: false
+  definitions:
+  # - name: sample
+  #   storageClass: ''
+  #   accessMode: ReadWriteOnce
+  #   size: 10Gi
+
+ingress:
+  enabled: false
+  # className: "kong"
+  # annotations: {}
+  # hosts:
+  #   - host: chart-example.local
+  #     paths:
+  #       - path: /
+  #         pathType: ImplementationSpecific
+  # tls: []
+
+autoscaling:
+  enabled: false
+  # minReplicas: 1
+  # maxReplicas: 100
+  # targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

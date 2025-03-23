@@ -1,0 +1,5 @@
+apiVersion: v2
+name: lib
+description: library helm chart
+type: library
+version: 1.0.0

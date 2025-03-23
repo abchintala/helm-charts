@@ -1,0 +1,13 @@
+{{- include "lib.hpa" . }}
+---
+{{- include "lib.deployment" . }}
+---
+{{- include "lib.ing" . }}
+---
+{{- include "lib.pvc" . }}
+
+{{- include "lib.sa" . }}
+---
+{{- include "lib.service" . }}
+---
+{{- include "lib.configmap" . }}
